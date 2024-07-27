@@ -27,4 +27,4 @@ data = {
 }
 
 df = pd.DataFrame(data)
-df.to_csv('data/Elektronics_sales_data.csv', index=False)
+df.to_csv('../data/Elektronics_sales_data.csv', index=False)
