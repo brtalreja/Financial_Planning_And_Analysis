@@ -6,11 +6,11 @@ def calculate_forecast(data):
     '''
         This function forecasts the profit based on the revenue and expense.
     '''
-    data['Forecast_Revenue'] = data['Revenue'] * 1.05 #5% projected revenue
-    data['Forecast_Expense'] = data['Expense'] * 1.03 #3% projected expense
+    data['Forecast_Revenue'] = data.groupby('Division')['Revenue'].transform('sum') * 1.05 #5% projected revenue
+    data['Forecast_Expense'] = data.groupby('Division')['Expense'].transform('sum') * 1.03 #3% projected expense
     data['Forecast_Profit'] = data['Forecast_Revenue'] - data['Forecast_Expense']
 
-    return data
+    return data[['Division', 'Forecast_Revenue', 'Forecast_Expense', 'Forecast_Profit']].drop_duplicates()
 
 def main():
     data = load_data('../data/Elektronics_sales_data.csv')
